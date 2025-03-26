@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/// <reference path="./types.d.ts" />
 import minimist from 'minimist';
 import fs from 'node:fs';
 import path from 'node:path';

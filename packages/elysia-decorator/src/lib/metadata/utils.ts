@@ -7,12 +7,14 @@ export class MetadataUtil {
   static define<K extends MetadataKey, V extends MetadataValue<K>>(
     key: K,
     value: V,
-    target: Object,
+    target: Function,
     propertyKey?: string | symbol,
   ): void {
-    propertyKey
-      ? Reflect.defineMetadata(METADATA_KEYS[key], value, target, propertyKey)
-      : Reflect.defineMetadata(METADATA_KEYS[key], value, target);
+    if (propertyKey) {
+      Reflect.defineMetadata(METADATA_KEYS[key], value, target, propertyKey);
+    } else {
+      Reflect.defineMetadata(METADATA_KEYS[key], value, target);
+    }
   }
 
   /**
@@ -21,7 +23,7 @@ export class MetadataUtil {
   static get<
     K extends MetadataKey,
     V extends MetadataValue<K> = MetadataValue<K>,
-  >(key: K, target: Object, propertyKey?: string | symbol): V {
+  >(key: K, target: Function, propertyKey?: string | symbol): V {
     return propertyKey
       ? Reflect.getMetadata(METADATA_KEYS[key], target, propertyKey)
       : Reflect.getMetadata(METADATA_KEYS[key], target);
@@ -33,12 +35,14 @@ export class MetadataUtil {
   static set<K extends MetadataKey, V extends MetadataValue<K>>(
     key: K,
     value: V,
-    target: Object,
+    target: Function,
     propertyKey?: string | symbol,
   ) {
-    propertyKey
-      ? Reflect.defineMetadata(METADATA_KEYS[key], value, target, propertyKey)
-      : Reflect.defineMetadata(METADATA_KEYS[key], value, target);
+    if (propertyKey) {
+      Reflect.defineMetadata(METADATA_KEYS[key], value, target, propertyKey);
+    } else {
+      Reflect.defineMetadata(METADATA_KEYS[key], value, target);
+    }
   }
 
   /**
@@ -47,12 +51,12 @@ export class MetadataUtil {
   static add<
     K extends Exclude<MetadataKey, 'MODULE' | 'PREFIX'>,
     V extends MetadataValue<K>,
-    T extends MetadataValue<K>[number],
-  >(key: K, target: Object, value: T, propertyKey?: string | symbol): void {
+    T extends V[number],
+  >(key: K, target: Function, value: T, propertyKey?: string | symbol): void {
     const collection = MetadataUtil.get<K, V>(key, target, propertyKey) ?? [];
     // @ts-expect-error Value type mismatch
     collection.push(value);
 
-    MetadataUtil.define<K, V>(key, collection, target, propertyKey);
+    MetadataUtil.define(key, collection, target, propertyKey);
   }
 }

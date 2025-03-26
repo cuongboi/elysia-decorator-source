@@ -1,9 +1,0 @@
-.git
-Dockerfile
-.dockerignore
-/dist/
-/.turbo/
-README.md
-
-.env 
-.env*

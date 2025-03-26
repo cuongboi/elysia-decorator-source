@@ -13,7 +13,7 @@ export class ModuleFactory {
     return MetadataUtil.get('MODULE', target);
   }
 
-  private static getControllerPrefix(target: Object): string {
+  private static getControllerPrefix(target: Function): string {
     return MetadataUtil.get('PREFIX', target) ?? '/';
   }
 
@@ -75,7 +75,7 @@ export class ModuleFactory {
   }) => {
     const app = new Elysia();
 
-    const target = (route as any).target as any;
+    const target = route.target;
     const instance = this.container.resolve(target) as Record<
       string | symbol,
       Function
@@ -91,12 +91,12 @@ export class ModuleFactory {
       route.method,
       path,
       async <Ctx extends Context>(context: Ctx) => {
-        const [args, _] = await Promise.all([
+        const [args] = await Promise.all([
           this.resolveArguments(route, context, app),
           this.resolveRouteMiddlewares(route, context, app),
         ]);
 
-        return instance[route.methodName]?.apply(instance, args);
+        return instance[route.methodName]?.(...args);
       },
       route.hook,
     );
@@ -113,7 +113,7 @@ export class ModuleFactory {
       MetadataUtil.get('PARAM', route.target, route.methodName) ?? [];
 
     for await (const [index, param] of params) {
-      args[index] = await param(context, app as any, defaultValue);
+      args[index] = await param(context, app, defaultValue);
     }
 
     return args;
@@ -129,7 +129,7 @@ export class ModuleFactory {
       [];
 
     for await (const middleware of middlewares) {
-      await middleware.apply(app, [context, app as any]);
+      await middleware.apply(app, [context, app]);
     }
   }
 

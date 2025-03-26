@@ -11,7 +11,7 @@
     "@elysiajs/cors": "^1.2.0",
     "@elysiajs/swagger": "^1.2.2",
     "elysia": "^1.2.25",
-    "elysia-decorator": "latest",
+    "elysia-decorator": "^1.3.5",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {

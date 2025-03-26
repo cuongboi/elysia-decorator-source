@@ -9,7 +9,6 @@ const app = new Elysia()
   .use(cors())
   .use(swagger())
   .use(useModule(AppModule))
-  .get('/', () => 'Hello Elysia Decorator! \n\n Swagger UI: /swagger')
   .listen(3000);
 
-console.log(`Server running at http://localhost:${app.server?.port}`);
+console.log(`Server running at http://localhost:${app.server?.port}/swagger`);

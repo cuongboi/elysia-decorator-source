@@ -1,16 +1,9 @@
-import { Static, t } from 'elysia';
+import { t } from 'elysia';
 import { Controller, Get, Post, Body, Params } from 'elysia-decorator';
 import { inject, injectable } from 'tsyringe';
 
+import { AppPostSchema } from './app.dto';
 import { AppService } from './app.service';
-
-// Schema for POST requests
-const AppPostSchema = t.Object({
-  title: t.String(),
-  content: t.String(),
-});
-
-type AppPostSchema = Static<typeof AppPostSchema>;
 
 @Controller()
 @injectable()

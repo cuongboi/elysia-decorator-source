@@ -27,7 +27,7 @@ async function buildAll() {
     );
 
     // Generate type declarations once
-    await $`tsc --project tsconfig.dts.json`.quiet();
+    await $`bunx tsc --project tsconfig.dts.json`.quiet();
 
     // Bun-specific build with optimized config
     const bunBuildPromise = Bun.build({
@@ -36,7 +36,7 @@ async function buildAll() {
       minify: { whitespace: true, syntax: true, identifiers: false },
       target: 'bun',
       sourcemap: 'external',
-      external: ['tsyringe', '@sinclair/typebox'],
+      external: ['tsyringe'],
     });
 
     // Optimize .mjs imports
@@ -70,8 +70,8 @@ async function buildAll() {
     };
 
     // Copy declarations more efficiently
-    const copyDeclarationsPromise = async () => {
-      await $`mkdir -p dist/bun/lib/decorators`,
+    const copyDeclarationsPromise = $`mkdir -p dist/bun/lib/decorators`.then(
+      async () =>
         await Promise.all([
           $`cp dist/*.d.ts dist/cjs`,
           $`cp dist/lib/*.d.ts dist/cjs/lib`,
@@ -79,14 +79,14 @@ async function buildAll() {
           $`cp dist/*.d.ts dist/bun`,
           $`cp -f dist/lib/*.d.ts dist/bun/lib`,
           $`cp -f dist/lib/decorators/*.d.ts dist/bun/lib/decorators`,
-        ]);
-    };
+        ]),
+    );
 
     // Execute all tasks concurrently
     await Promise.all([
       bunBuildPromise,
       fixMjsImportsPromise(),
-      copyDeclarationsPromise(),
+      copyDeclarationsPromise,
     ]);
 
     console.log('Build completed successfully');

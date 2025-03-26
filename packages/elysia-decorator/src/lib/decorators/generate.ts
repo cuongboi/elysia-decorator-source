@@ -19,7 +19,12 @@ export const createParamDecorator: CreateParamDecorator = (loadParam) => {
 
 export const createRouteMiddleware: CreateRouteMiddleware = (middleware) => {
   return (target, propertyKey) => {
-    MetadataUtil.add('METHOD_MIDDLEWARE', target, middleware, propertyKey);
+    MetadataUtil.add(
+      'METHOD_MIDDLEWARE',
+      target as Function,
+      middleware,
+      propertyKey,
+    );
   };
 };
 

@@ -10,8 +10,8 @@ const __dirname = path.dirname(
  * @param {any} error
  */
 export function exitOnError(error) {
-  //   logUsage();
   console.error(`❌ Something went wrong :(\n\n`, error);
+
   process.exit(1);
 }
 
@@ -116,7 +116,7 @@ export function readScaffoldingConfigOnce(dirPath) {
 
   try {
     config = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' }));
-  } catch (e) {
+  } catch {
     // ignored
   } finally {
     fs.rmSync(filePath, { force: true });

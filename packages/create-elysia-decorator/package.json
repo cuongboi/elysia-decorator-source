@@ -1,7 +1,15 @@
 {
   "name": "create-elysia-decorator",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Scaffolding Elysia Decorator Project",
+  "author": {
+    "name": "cuongboi",
+    "url": "https://github.com/cuongboi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cuongboi/elysia-decorator-source"
+  },
   "scripts": {
     "release": "npm publish --access public"
   },
@@ -14,17 +22,19 @@
     "template-*/**",
     "scripts"
   ],
+  "dependencies": {
+    "minimist": "^1.2.8",
+    "prompts": "^2.4.2"
+  },
   "devDependencies": {
     "@types/node": "^22.13.4"
   },
+  "homepage": "https://github.com/cuongboi/elysia-decorator-source",
+  "bugs": "https://github.com/cuongboi/elysia-decorator-source/issues",
   "license": "MIT",
   "keywords": [
     "elysia",
     "elysia-decorator",
     "create-elysia-decorator"
-  ],
-  "dependencies": {
-    "minimist": "^1.2.8",
-    "prompts": "^2.4.2"
-  }
+  ]
 }

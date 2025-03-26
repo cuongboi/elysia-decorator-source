@@ -41,15 +41,10 @@ function copyDirSync(src, dest) {
 }
 
 if (!fs.cpSync) {
-  //? deno...
-  // @ts-ignore
+  // @ts-expect-error cpSync
   fs.cpSync = fs.copySync;
 
   if (!fs.cpSync) {
-    //? only in denoland...
-
-    // @ts-ignore
     fs.cpSync = denoCopySync;
   }
 }
-

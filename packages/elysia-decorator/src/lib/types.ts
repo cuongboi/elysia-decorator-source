@@ -144,7 +144,7 @@ export type CreateRouteHandler = <
   path: Path,
   hook?: Hook,
 ) => (
-  target: Object,
+  target: object,
   propertyKey: string | symbol,
   descriptor: PropertyDescriptor,
 ) => PropertyDescriptor;
