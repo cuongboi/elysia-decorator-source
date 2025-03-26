@@ -36,7 +36,7 @@ async function buildAll() {
       minify: { whitespace: true, syntax: true, identifiers: false },
       target: 'bun',
       sourcemap: 'external',
-      external: ['tsyringe'],
+      external: ['core-js', 'reflect-metadata', 'tsyringe'],
     });
 
     // Optimize .mjs imports
