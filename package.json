@@ -1,0 +1,33 @@
+{
+  "name": "elysia-decorator-source",
+  "module": "index.ts",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "example"
+  ],
+  "scripts": {
+    "clean": "rimraf bun.lock && rimraf packages/*/dist",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/bun": "latest",
+    "eslint": "^9.22.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.3"
+  },
+  "lint-staged": {
+    "packages/**/*.{ts}": [
+      "prettier --write \"**/*.ts\"",
+      "git add ."
+    ],
+    "example/**/*.{ts, tsx}": [
+      "prettier --write \"**/*.ts\"",
+      "git add ."
+    ]
+  }
+}

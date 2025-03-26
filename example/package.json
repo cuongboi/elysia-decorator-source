@@ -1,0 +1,24 @@
+{
+  "name": "elysia-decorator-example",
+  "private": true,
+  "scripts": {
+    "dev": "bun run --watch ./src/main.ts",
+    "build": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile ./dist/app ./src/main.ts",
+    "start": "./dist/app"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/eden": "^1.2.0",
+    "@elysiajs/swagger": "^1.2.2",
+    "elysia": "^1.2.25",
+    "elysia-decorator": "*",
+    "reflect-metadata": "^0.2.2",
+    "tosource": "^2.0.0-alpha.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

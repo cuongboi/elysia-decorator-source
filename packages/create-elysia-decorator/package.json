@@ -1,0 +1,30 @@
+{
+  "name": "create-elysia-decorator",
+  "version": "0.1.2",
+  "description": "Scaffolding Elysia Decorator Project",
+  "scripts": {
+    "release": "npm publish --access public"
+  },
+  "type": "module",
+  "bin": {
+    "create-elysia-decorator": "index.js"
+  },
+  "files": [
+    "index.js",
+    "template-*/**",
+    "scripts"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.13.4"
+  },
+  "license": "MIT",
+  "keywords": [
+    "elysia",
+    "elysia-decorator",
+    "create-elysia-decorator"
+  ],
+  "dependencies": {
+    "minimist": "^1.2.8",
+    "prompts": "^2.4.2"
+  }
+}

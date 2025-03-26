@@ -1,0 +1,21 @@
+{
+  "name": "$PROJECT_NAME$",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/main.ts",
+    "build": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile ./dist/app ./src/main.ts",
+    "start": "./dist/app",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/swagger": "^1.2.2",
+    "elysia": "^1.2.25",
+    "elysia-decorator": "latest",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/bun": "1",
+    "typescript": "5"
+  }
+}
